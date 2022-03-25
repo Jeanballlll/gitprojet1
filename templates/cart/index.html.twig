@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - Projet1
+{% endblock %}
+
+{% block content %}
+	<h1>Mon panier</h1>
+	Retrouvez de vos produits ajouté au panier.
+
+	{% if cart|length > 0 %}
+
+		<table class="table mt-3">
+			<thead>
+				<tr>
+					<th scope="col">Produit</th>
+					<th scope="col"></th>
+					<th scope="col">Quantité</th>
+					<th scope="col">Prix</th>
+					<th scope="col">Total</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% set total = null %}
+				{% for product in cart %}
+					<tr>
+						<th>
+							<img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" width="75px"><br>
+						</th>
+						<td>
+							{{ product.product.name }}<br>
+							<small>{{ product.product.subtitle }}</small>
+						</td>
+						<td>
+							<a href="{{ path('decrease_to_cart', { 'id' : product.product.id }) }}">
+								<img src="{{ asset('assets/img/less.png') }}" width="12px" alt="Supprimer ">
+							</a>
+							x{{ product.quantity }}
+							<a href="{{ path('add_to_cart', { 'id' : product.product.id }) }}">
+								<img src="{{ asset('assets/img/plus.png') }}" width="12px" alt="Ajouter">
+							</a>
+						</td>
+						<td>{{ (product.product.price /100)|number_format(2) }}€</td>
+						<td>{{ (product.product.price * product.quantity /100)|number_format(2) }}€</td>
+						<td>
+							<a href="{{ path('delete_to_cart', { 'id' : product.product.id}) }}">
+								<img src="{{ asset('assets/img/delete.png') }}" width="18px" alt="Supprimer le produit">
+							</a>
+						</td>
+					</tr>
+					{% set total = total + (product.product.price * product.quantity)  %}
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-righ mb-5">
+			<b>Nombre de produit :</b>
+			{{ cart|length }}<br>
+			<b>Total de mon panier :</b>
+			{{ (total / 100)|number_format(2) }}
+			€
+			<br>
+			<a href="{{ path('app_order') }}" class="btn btn-success btn-block mt-3">Valider mon panier</a>
+		</div>
+	{% else %}
+		<hr>
+		<p>
+			<b>Panier vide.</b>
+		</p>
+
+	{% endif %}
+{% endblock %}

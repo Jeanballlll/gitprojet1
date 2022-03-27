@@ -45,12 +45,28 @@ body {
   font-size: 19px;
 }
 
-.cart-icon {
-  width: 20px;
+.card-icon {
+  height: 10px;
   padding-left: 20px;
 }
 
 .block-small {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.form-check {
+  background-color: #e1eafa;
+  padding: 20px 65px;
+  margin-top: 7px;
+}
+
+.col-form-label {
+  font-weight: bold;
+}
+
+.order-sumary {
+  background-color: #e1eafa;
+  padding: 20px;
+  margin-top: 73px;
 }

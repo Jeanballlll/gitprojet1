@@ -92,7 +92,7 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);
             }
 
-            // $this->EntityManager->flush();
+            $this->entityManager->flush();
 
             // Si le formulaire est soumis, on affiche la route. 
             return $this->render('order/add.html.twig', [

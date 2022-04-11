@@ -21,6 +21,19 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+    // findSuccessOrders(), permet d'afficher les commandes dans l'espace de l'utilisateur
+    public function findSuccessOrders($user)
+    {
+        // alias 'o' c'est l'alias de order,parcequ'on est dans orderRepository
+        return $this->createQueryBuilder('o')
+        ->andWhere('o.isPaid = 1')
+        ->andWhere('o.user = :user')
+        ->setParameter('user',$user)
+        ->orderBy('o.id', 'DESC')
+        ->getQuery()
+        ->getResult();
+    }
+
     /**
      * @throws ORMException
      * @throws OptimisticLockException

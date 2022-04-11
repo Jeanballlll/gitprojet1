@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-
+use Stripe\Stripe;
 use App\Classe\Cart;
 use App\Entity\Order;
+
+
 use App\Entity\Product;
-use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
-use Stripe\Stripe;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
  
@@ -25,7 +26,7 @@ class StripeController extends AbstractController
         $YOUR_DOMAIN = 'http://127.0.0.1:8000';
         // Pour avoir les images des achats effectuer,il ne faut pas etre en local (ex:https://projet1.fr)
  
-$order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
+        $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
         if(!$order) {
             return $this->redirectToRoute('order');

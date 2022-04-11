@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
-use App\Form\RegisterType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Classe\Mail;
 use App\Entity\User;
+use App\Form\RegisterType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Stmt\Break_;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
@@ -25,6 +27,9 @@ class RegisterController extends AbstractController
     #[Route('/register', name: 'app_register')]
     public function index(Request $request, UserPasswordHasherInterface $encoder): Response
     {
+
+        $notification = null;
+
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -33,17 +38,34 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $encoder->hashPassword($user, $user->getPassword());
+            //Vérifi si l'utilisateur n'est pas encore présent en bdd
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            $user->setPassword($password);
+            // Un petit msg de notification a l'utisateur, une fois inscrit 
+            if (!$search_email)
+            {
+                $password = $encoder->hashPassword($user,$user->getPassword());
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            return $this->redirectToRoute('home');
+                $user->setPassword($password);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                $mail = new Mail();
+                $content = "Bonjour ".$user->getFirstname()."<br/>Bienvenue sur la plateform en ligne.<br/><br/>La premiere Boutique Française.";
+                $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur la Boutique J-C.B', $content);
+
+                
+                $notification = "Bienvenue, connectez-vous a votre compte.";
+            } else {
+                $notification = "Cette adresse e-mail existe déjà.";
+            }
+  
         }
 
-        return $this->render('register/index.html.twig', [
-            'form' => $form->createView()
+            return $this->render('register/index.html.twig', [
+                'form' => $form->createView(),
+                'notification' => $notification
         ]);
     }
 }

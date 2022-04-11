@@ -30,7 +30,7 @@ class RegisterType extends AbstractType
             ])
 
             ->add('lastname', TextType::class, [
-                'label' => ' nom',
+                'label' => 'nom',
                 'constraints' => new Length([
                     'min' => 2,
                     'max' => 30
@@ -41,15 +41,15 @@ class RegisterType extends AbstractType
             ])
 
             ->add('email', EmailType::class, [
-                'label' => ' email',
+                'label' => 'email',
                 'attr' => [
-                    'placeholder' => 'saisissez votre email'
+                    'placeholder' => 'saisissez votre adresse email'
                 ]
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Le mot de passe doit être identique!',
-                'label' => ' Mot de passe',
+                'label' => 'Mot de passe',
                 'required' => true,
                 'first_options' => [
                     'label' => 'Mot de passe',

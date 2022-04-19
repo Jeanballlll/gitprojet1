@@ -1,0 +1,15 @@
+{# Apres l'installation "composer require symfony/twig-pack" on crée ce fichier pour avoir un msg personaliser, si l'utilisateur entre n'importe quoi dans l'url  #}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable - Projet 1
+{% endblock %}
+
+{% block content %}
+	<div class="block-small">
+		<h2>Page introuvable</h2>
+        <p>Cette page n'existe pas</p>
+        <a href="{{ path('home') }}" class="btn btn-info">Revenir à l'accueil</a>
+    </div>
+{% endblock %}

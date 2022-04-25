@@ -18,7 +18,8 @@ class ChangePasswordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            
+
+        //disabled true, c'est pour que l'utilisateur ne puisse pas modifier les infos autre que le mot de passe.
             ->add('firstname', TextType::class, [
                 'disabled' => true,
                 'label' => 'prénom'

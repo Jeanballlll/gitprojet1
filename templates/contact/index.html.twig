@@ -6,19 +6,17 @@
     <h2>Nous contacter</h2>
     <p>N'hésitez pas à prendre contact avec nous.</p>
     {% for message in app.flashes('notice') %}
-       			 <div class="alert alert-info">{{ message }}</div>
-       		 {% endfor %}
+        <div class="alert alert-info">{{ message }}</div>
+    {% endfor %}
 
     <div class="row">
         <div class="col-md-8">{{ form(form) }}</div>
         <div class="col-md-4">
-        <strong>La Boutique J-C.B</strong>
-        <hr>
-        06 62 94 12 21 <br>
-        12 Champs Elysées, 75008 Paris. <br>
-        BoutiqueJean@laposte.net <br>
-
+            <strong>La Boutique J-C.B</strong>
+            <hr>
+            06 62 94 12 21 <br>
+            12 Champs Elysées, 75008 Paris.<br>
+            BoutiqueJean@laposte.net <br>
         </div>
     </div>
-
 {% endblock %}

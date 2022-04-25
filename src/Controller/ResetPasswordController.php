@@ -30,8 +30,8 @@ class ResetPasswordController extends AbstractController
     {
 
         if ($this->getUser()) {
-    return $this->redirectToRoute('home');
-}
+        return $this->redirectToRoute('home');
+    }
 
         if ($request->get('email')) {
             $user = $this->entityManager->getRepository(User::class)->findOneByEmail($request->get('email'));

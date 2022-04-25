@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-	<a href="{{ path('app_account_address_add') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+		<a href="{{ path('app_account_address_add') }}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
 	<h1>Mes adresses</h1>
 	Gestion d'adresses.
 	<br>
-	<a href="{{ path('app_account') }}">Retour</a>
+		<a href="{{ path('app_account') }}">Retour</a>
 	<hr>
 	{% if app.user.addresses|length == 0 %}
 		<p class="text-center">

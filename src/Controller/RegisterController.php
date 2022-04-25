@@ -33,6 +33,7 @@ class RegisterController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
+        // dès que le formulaire est soumis, traite l'information et si c'est valide (RegisterType), enregistre en bdd.
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

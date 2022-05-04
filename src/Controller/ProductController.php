@@ -42,8 +42,7 @@ class ProductController extends AbstractController
             'form' => $form->createView()
         ]); 
     }
-
-
+    // {slug} c'est pour que l'utilisateur trouve sa recherche dans l'url.
     #[Route('/produit/{slug}', name: 'app_product')]
 
     public function show($slug)

@@ -51,8 +51,10 @@ class Cart
     {
         $cart = $this->session->get('cart', []);
         if ($cart[$id] > 1) {
+            //Pour retiré une quantitée dans le panier si c'est supérieur a 1
             $cart[$id]--;
         } else {
+            //Pour supprimer le produit de la liste si la quantitée est inférieur a 1
             unset($cart[$id]);
         }
         return $this->session->set('cart', $cart);

@@ -4,34 +4,33 @@
 	<script src="http://js.stripe.com/v3"></script>
 {% endblock %}
 
-{% block title %}Paiement de ma commande - Projet1
+{% block title %}Paiement de ma commande - La Boutique J-C.B
 {% endblock %}
 
 {% block content %}
 	<h2>Mon Récapitulatif<h2>
-	<p>Vérifiez vos informations de payer votre commande.</p>
 	<hr>
 	<div class="row">
 		<div class="col-md-6">
 			<strong>Mon adresse de livraison</strong><br/>
-			<div class="form-check mt-4">
+			<div class="form-check mt-5">
 				{{ delivery|raw }}
 				{# |raw c'est pour ne pas afficher les balises sur le web  #}
 			</div>
 			<hr>
-			<strong>Mon transporteur</strong><br>
+			<strong>Mon transporteur</strong><br/>
 			<div class="form-check">
-				{{ carrier.name }}<br>
-				{{ carrier.description }}<br>
+				{{ carrier.name }}<br/>
+				{{ carrier.description }}<br/>
 				{{ (carrier.price / 100)|number_format(2, ',', '.') }}
 				€
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="text-center">
-				<b>Ma commande(s)</b><br/>
+				<b>Ma commande</b><br/>
 			</div>
-			<div class="order-sumary">
+			<div class="order-sumary mt-5">
 				{% set total = null %}
 				{% for key,product in cart %}
 					<div class="row {% if key > 0 %}mt-2 {% endif %}">
@@ -55,7 +54,7 @@
 			<strong>Sous-Total : </strong>
 			{{ (total / 100)|number_format(2, ',', '.') }}
 			€<br/>
-			<strong>Livraison : </strong>
+			<strong>Frais de Livraison : </strong>
 			{{ (carrier.price / 100)|number_format(2, ',', '.') }}
 			€
 			<hr>

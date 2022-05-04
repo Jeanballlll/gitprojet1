@@ -21,6 +21,7 @@ class OrderCrudController extends AbstractCrudController
         return Order::class;
     }
 
+    //Pour pouvoir consulté les détails des commandes des utilisateurs dans admin/order
     public function configureActions(Actions $actions): Actions
     {
         return $actions
@@ -29,7 +30,7 @@ class OrderCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        // Un trie Pour afficher dirrectement la commande avec le gros gros id dans admin/order
+        // Un trie Pour afficher dirrectement la commande avec le gros id dans admin/order
         return $crud->setDefaultSort(['id' => 'DESC']);
     }
 

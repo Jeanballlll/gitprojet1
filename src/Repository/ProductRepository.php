@@ -53,7 +53,7 @@ class ProductRepository extends ServiceEntityRepository
     public function findWithSeach (Search $search)
     {
         $query = $this
-        ->createQueryBuilder('p')
+        ->createQueryBuilder('p')  // p=product et c=category
         ->select('c','p')
         ->join('p.category', 'c');
 
@@ -66,7 +66,7 @@ class ProductRepository extends ServiceEntityRepository
         if (!empty($search->string)) {
             $query = $query
                 ->andWhere('p.name LIKE :string')
-                ->setParameter('string', "%{$search->string}%");
+                ->setParameter('string', "%{$search->string}%"); // pour afficher la sélection de produit rechercher par l'utlisateur.
         }
 
 

@@ -66,7 +66,8 @@ class AccountAddressController extends AbstractController
         $form = $this->createForm(AddressType::class, $address);
 
         $form->handleRequest($request);
-
+        
+        //Pas besoin de persist quand on fait une mise à jour.
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
             return $this->redirectToRoute('app_account_address');

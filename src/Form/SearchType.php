@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
     {
         $builder
             ->add('string', TextType::class, [
-                'label' => 'false',
+                'label' => false,
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Votre recherche ...',
@@ -50,6 +50,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
         ]);
     }
 
+    // pour avoir un url vide.
     public function getBlockPrefix()
     {
         return '';

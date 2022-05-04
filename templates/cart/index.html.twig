@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon panier - Projet1
+{% block title %}Mon panier - La Boutique J-C.B
 {% endblock %}
 
 {% block content %}
 	<h1>Mon panier</h1>
-	Retrouvez de vos produits ajouté au panier.
+	Retrouvez ici vos produits ajouté au panier.
 
 	{% if cart|length > 0 %}
 
@@ -15,7 +15,7 @@
 					<th scope="col">Produit</th>
 					<th scope="col"></th>
 					<th scope="col">Quantité</th>
-					<th scope="col">Prix</th>
+					<th scope="col">Prix unitaire</th>
 					<th scope="col">Total</th>
 					<th scope="col"></th>
 				</tr>
@@ -40,8 +40,8 @@
 								<img src="{{ asset('assets/img/plus.png') }}" width="12px" alt="Ajouter">
 							</a>
 						</td>
-						<td>{{ (product.product.price /100)|number_format(2) }}€</td>
-						<td>{{ (product.product.price * product.quantity /100)|number_format(2) }}€</td>
+						<td>{{ (product.product.price /100)|number_format(2, ',','.') }}€</td>
+						<td>{{ (product.product.price * product.quantity /100)|number_format(2, ',','.') }}€</td>
 						<td>
 							<a href="{{ path('delete_to_cart', { 'id' : product.product.id}) }}">
 								<img src="{{ asset('assets/img/delete.png') }}" width="18px" alt="Supprimer le produit">

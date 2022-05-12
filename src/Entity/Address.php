@@ -13,8 +13,8 @@ class Address
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'addresses')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'addresses', cascade: ['remove'])]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'cascade')]
     private $user;
 
     #[ORM\Column(type: 'string', length: 255)]

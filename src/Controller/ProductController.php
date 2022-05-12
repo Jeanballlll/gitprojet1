@@ -43,11 +43,11 @@ class ProductController extends AbstractController
         ]); 
     }
     // {slug} c'est pour que l'utilisateur trouve sa recherche dans l'url.
-    #[Route('/produit/{slug}', name: 'app_product')]
 
-    public function show($slug)
+    #[Route('/produit/{id}', name: 'app_product')]
+    public function show($id)
     {
-        $product = $this->entityManager->getRepository(Product::class)->findOneBy(['slug' => $slug]);
+        $product = $this->entityManager->getRepository(Product::class)->find($id);
         $products = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
         
         if (!$product) {

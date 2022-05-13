@@ -87,6 +87,19 @@ body {
   color: #778ca3;
 }
 
+/* Responsive */
+
+@media (max-width: 500px) {
+  html {
+    font-size: 14px;
+  }
+
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 42px 42px 42px 42px 42px 42px 42px 42px 42px 42px;
+  }
+}
+
 /* .img-fluid {
   max-height: 180px;
 } */

@@ -42,49 +42,53 @@
 			{% include "/partial/_navBar.html.twig" %}
 		</header>
 
-		{% if block('carousel') is defined %}
-			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-				<div class="carousel-indicators">
-					{% for key,header in headers %}
-						<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide 1"></button>
-					{% endfor %}
-				</div>
-				<div class="carousel-inner">
-					{% for key,header in headers %}
-						<div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/uploads/{{ header.illustration }}');background-size:cover;">
-							
-							<div class="container">
-								<div class="carousel-caption text-left">
-									<h1>{{ header.title }}</h1>
-									<p>{{ header.content }}</p>
-									<p>
-										<a class="btn btn-lg btn-info" href="{{ header.btnUrl }}" role="button">{{ header.btnTitle }}</a>
-									</p>
+		<main>
+		
+			{% if block('carousel') is defined %}
+				<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						{% for key,header in headers %}
+							<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ key }}" {% if key == 0 %} class="active" {% endif %} aria-current="true" aria-label="Slide 1"></button>
+						{% endfor %}
+					</div>
+					<div class="carousel-inner">
+						{% for key,header in headers %}
+							<div class="carousel-item {% if key == 0 %}active{% endif %}" style="background: url('/uploads/{{ header.illustration }}');background-size:cover;">
+								
+								<div class="container">
+									<div class="carousel-caption text-left">
+										<h1>{{ header.title }}</h1>
+										<p>{{ header.content }}</p>
+										<p>
+											<a class="btn btn-lg btn-info" href="{{ header.btnUrl }}" role="button">{{ header.btnTitle }}</a>
+										</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
+						{% endfor %}
+					</div>
+
+					<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Précédent</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Suivant</span>
+					</button>
 				</div>
+			{% endif %}
 
-				<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Précédent</span>
-				</button>
-				<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Suivant</span>
-				</button>
+			<div class="container marketing {% if block('carousel') is not defined %}pt-5{% endif %}">
+				{% block content %}{% endblock %}
 			</div>
-		{% endif %}
+		
+		</main>
 
-		<div class="container marketing {% if block('carousel') is not defined %}mt-5{% endif %}">
-
-			{% block content %}{% endblock %}
-
-		</div>
 		<footer>
 			{% include "/partial/footer.html.twig" %}
 		</footer>
+
 		<script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" </script> 
 	</body>
 	{% block script %}{% endblock %}
